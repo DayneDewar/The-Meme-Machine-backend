@@ -43,6 +43,8 @@ class MemesController < ApplicationController
             "x-rapidapi-host": 'ronreiter-meme-generator.p.rapidapi.com'
         }
         # meme_image_array = JSON.parse(meme_images)
+        create_meme = Meme.create(meme_params)
+        create_meme.meme_image.attach(meme_images.body)
         byebug
     end
 
