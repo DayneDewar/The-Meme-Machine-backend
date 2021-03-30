@@ -1,4 +1,3 @@
-require 'rest-client'
 require 'byebug'
 
 meme_images = RestClient.get "https://ronreiter-meme-generator.p.rapidapi.com/images?rapidapi-key=d45c4bf44bmsh5794f268d449d19p18f503jsn618a9ca69a76"

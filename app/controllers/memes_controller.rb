@@ -37,6 +37,15 @@ class MemesController < ApplicationController
         render json: @meme
     end
 
+    def generate
+        meme_images = RestClient.get "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=#{params[:image]}&bottom=#{params[:bottom]}&top=#{params[:top]}&font_size=50&font=Impact",{
+            "x-rapidapi-key": 'd45c4bf44bmsh5794f268d449d19p18f503jsn618a9ca69a76',
+            "x-rapidapi-host": 'ronreiter-meme-generator.p.rapidapi.com'
+        }
+        # meme_image_array = JSON.parse(meme_images)
+        byebug
+    end
+
 
 
     private
