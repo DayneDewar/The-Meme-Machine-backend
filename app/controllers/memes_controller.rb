@@ -54,7 +54,6 @@ class MemesController < ApplicationController
         # meme_image_array = JSON.parse(meme_images)
         # create_meme = Meme.create(meme_params)
         # byebug
-        url_for(meme.meme_image)
         render json: meme
     end
 
