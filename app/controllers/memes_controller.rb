@@ -1,3 +1,5 @@
+require 'open-uri'
+        
 class MemesController < ApplicationController
 
     def index
@@ -38,17 +40,23 @@ class MemesController < ApplicationController
     end
 
     def generate
-        meme_images = RestClient.get "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=#{params[:image]}&bottom=#{params[:bottom]}&top=#{params[:top]}&font_size=50&font=Impact",{
-            "x-rapidapi-key": 'd45c4bf44bmsh5794f268d449d19p18f503jsn618a9ca69a76',
-            "x-rapidapi-host": 'ronreiter-meme-generator.p.rapidapi.com'
-        }
+        file = open("https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=#{params[:image]}&bottom=#{params[:bottom]}&top=#{params[:top]}&font_size=50&font=Impact", {
+            "x-rapidapi-key" => 'd45c4bf44bmsh5794f268d449d19p18f503jsn618a9ca69a76',
+            "x-rapidapi-host" => 'ronreiter-meme-generator.p.rapidapi.com'}
+        )
+        meme = Meme.create(meme_params)
+        meme.meme_image.attach(io: file, filename: "test.jpg", content_type: 'image/jpg')
+        # puts response.read_body
+        # generated_meme = RestClient.get "https://ronreiter-meme-generator.p.rapidapi.com/meme?meme=#{params[:image]}&bottom=#{params[:bottom]}&top=#{params[:top]}&font_size=50&font=Impact",{
+        #     "x-rapidapi-key": 'd45c4bf44bmsh5794f268d449d19p18f503jsn618a9ca69a76',
+        #     "x-rapidapi-host": 'ronreiter-meme-generator.p.rapidapi.com'
+        # }
         # meme_image_array = JSON.parse(meme_images)
-        create_meme = Meme.create(meme_params)
-        create_meme.meme_image.attach(meme_images.body)
-        byebug
+        # create_meme = Meme.create(meme_params)
+        # byebug
+        url_for(meme.meme_image)
+        render json: meme
     end
-
-
 
     private
 
