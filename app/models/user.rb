@@ -1,6 +1,9 @@
 class User < ApplicationRecord
     has_many :memes
     has_many :favorites
-    has_many :memes, through: :favorites, as: :fav_memes
     
+    has_secure_password
+    validates :username, presence: true
+    validates :username, uniqueness: true
+    validates :username, length: { minimum: 4 }
 end

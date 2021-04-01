@@ -1,9 +1,4 @@
-require 'byebug'
-
-
-user1 = User.create(username: "GenericUser")
-
-fav1 = Favorite.create(user_id: 1, meme_id: 1)
-
+user1 = User.create(username: "GenericUser", password: "generic")
+user1 = User.create(username: "GenericUser2", password: "generic2")
 
 puts "****** SEEDED ********"

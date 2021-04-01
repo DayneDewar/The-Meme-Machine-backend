@@ -4,7 +4,7 @@ class MemeSerializer < ActiveModel::Serializer
 
 
   def meme_image_url
-    variant = object.meme_image.variant(resize: "300x300")
+    variant = object.meme_image.variant(resize: "500x500")
     return rails_representation_url(variant, only_path: true)
   end
 
